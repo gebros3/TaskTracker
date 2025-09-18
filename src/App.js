@@ -32,7 +32,7 @@ const addItem = (name, date) => {
 
 const getItems = () => {
   axios.get("http://localhost:8080/get-task").then((response) => {
- updateList(response.data);
+ updateList(response.data.sort((a, b) => a.date.localeCompare(b.date)));
 
   });
 }

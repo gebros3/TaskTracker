@@ -1,7 +1,8 @@
-const TaskRow = ({ item, onDelete }) => (
-  <tr>
+const TaskRow = ({ item, onDelete }) => {
+  
+  return(<tr>
     <td>{item.name}</td>
-    <td>{item.date}</td>
+    <td style = {{color: comparePastDate(item.date) < 0 ? "red" : (comparePastDate(item.date) === 0 ? "yellow" : "green")}}>{item.date}</td>
     <td style={{ textAlign: 'right' }}>
       <button
         type="button"
@@ -13,9 +14,13 @@ const TaskRow = ({ item, onDelete }) => (
         ×
       </button>
     </td>
-  </tr>
-);
+  </tr>);
+};
 
+const comparePastDate = (date) => {
+    let currentDate = new Date().toJSON().slice(0,10);
+    return date.localeCompare(currentDate);
+}
 const Table = ({list, onDelete}) => {
     return (
     <div>
